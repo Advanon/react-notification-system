@@ -119,7 +119,6 @@ var CustomNotificationItem = createReactClass({
       }
     }
 
-
     if (autoDismiss) {
       this._notificationTimer = new Helpers.Timer(function() {
         self._hideNotification();

@@ -38,8 +38,8 @@ var NotificationContainer = createReactClass({
           <CustomNotificationItem
             ref={ 'notification-' + notification.uid }
             key={ notification.uid }
-            onRemove={ self.props.onRemove }
             { ...notification }
+            onRemove={ self.props.onRemove }
           />
         );
       }

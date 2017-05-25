@@ -37,9 +37,9 @@ var NotificationContainer = createReactClass({
         return (
           React.createElement(CustomNotificationItem, React.__spread({
             ref:  'notification-' + notification.uid, 
-            key:  notification.uid, 
-            onRemove:  self.props.onRemove}, 
-             notification )
+            key:  notification.uid}, 
+             notification , 
+            {onRemove:  self.props.onRemove})
           )
         );
       }

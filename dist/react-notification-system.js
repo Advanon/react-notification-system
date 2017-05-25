@@ -2404,9 +2404,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (notification.createNotification) {
 	          return React.createElement(CustomNotificationItem, _extends({
 	            ref: 'notification-' + notification.uid,
-	            key: notification.uid,
+	            key: notification.uid
+	          }, notification, {
 	            onRemove: self.props.onRemove
-	          }, notification));
+	          }));
 	        }
 
 	        return React.createElement(NotificationItem, {
