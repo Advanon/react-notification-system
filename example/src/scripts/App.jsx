@@ -87,6 +87,18 @@ NotificationSystemExample = createReactClass({
       autoDismiss: 0,
       level: 'error',
       position: 'br'
+    },
+    {
+      position: 'br',
+      autoDismiss: 0,
+      dismissable: true,
+      createNotification: (props) => {
+        return (
+          <div { ...props } onClick={ props.onHide }>
+            Custom component!
+          </div>
+        );
+      }
     }
   ],
 

@@ -2,6 +2,7 @@ var React = require('react');
 var createReactClass = require('create-react-class');
 var PropTypes = require('prop-types');
 var NotificationItem = require('./NotificationItem');
+var CustomNotificationItem = require('./CustomNotificationItem');
 var Constants = require('./constants');
 
 var NotificationContainer = createReactClass({
@@ -32,6 +33,17 @@ var NotificationContainer = createReactClass({
     }
 
     notifications = this.props.notifications.map(function(notification) {
+      if (notification.createNotification) {
+        return (
+          <CustomNotificationItem
+            ref={ 'notification-' + notification.uid }
+            key={ notification.uid }
+            onRemove={ self.props.onRemove }
+            { ...notification }
+          />
+        );
+      }
+
       return (
         <NotificationItem
           ref={ 'notification-' + notification.uid }
