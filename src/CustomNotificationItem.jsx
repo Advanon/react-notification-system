@@ -27,7 +27,10 @@ var CustomNotificationItem = createReactClass({
   displayName: 'CustomNotificationItem',
 
   propTypes: {
-    uid: PropTypes.string.isRequired,
+    uid: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
     createNotification: PropTypes.func.isRequired,
     onRemove: PropTypes.func,
     dismissable: PropTypes.bool,
@@ -156,7 +159,7 @@ var CustomNotificationItem = createReactClass({
 
     return createNotification({
       className: className,
-      onClick: this._dismiss,
+      onHide: this._dismiss,
       onMouseEnter: this._handleMouseEnter,
       onMouseLeave: this._handleMouseLeave,
       style: {
