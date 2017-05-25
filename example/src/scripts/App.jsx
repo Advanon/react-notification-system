@@ -86,7 +86,19 @@ NotificationSystemExample = createReactClass({
       message: 'Until you click me.',
       autoDismiss: 0,
       level: 'error',
-      position: 'br'
+      position: 'br',
+    },
+    {
+      position: 'br',
+      autoDismiss: 0,
+      dismissable: true,
+      createNotification: (props) => {
+        return (
+          <div { ...props }>
+            Custom component!
+          </div>
+        );
+      }
     }
   ],
 

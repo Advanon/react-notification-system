@@ -109,13 +109,18 @@ var NotificationSystem = createReactClass({
     var _notification = merge({}, Constants.notification, notification);
     var notifications = this.state.notifications;
     var i;
+    var isCustomCreate = !!notification.createNotification;
 
-    if (!_notification.level) {
-      throw new Error('notification level is required.');
-    }
+    // If notification.createNotification is set then there is no
+    // need for custom level as user should create the component
+    if (!isCustomCreate) {
+      if (!_notification.level) {
+        throw new Error('notification level is required.');
+      }
 
-    if (Object.keys(Constants.levels).indexOf(_notification.level) === -1) {
-      throw new Error('\'' + _notification.level + '\' is not a valid level.');
+      if (Object.keys(Constants.levels).indexOf(_notification.level) === -1) {
+        throw new Error('\'' + _notification.level + '\' is not a valid level.');
+      }
     }
 
     if (isNaN(_notification.autoDismiss)) {
@@ -128,8 +133,11 @@ var NotificationSystem = createReactClass({
 
     // Some preparations
     _notification.position = _notification.position.toLowerCase();
-    _notification.level = _notification.level.toLowerCase();
     _notification.autoDismiss = parseInt(_notification.autoDismiss, 10);
+
+    if (!isCustomCreate) {
+      _notification.level = _notification.level.toLowerCase();
+    }
 
     _notification.uid = _notification.uid || this.uid;
     _notification.ref = 'notification-' + _notification.uid;
