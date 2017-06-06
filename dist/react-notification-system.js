@@ -143,11 +143,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _didNotificationRemoved: function () {
-	    function _didNotificationRemoved(uid) {
+	    function _didNotificationRemoved(uid, wasAutoDimissed) {
 	      var notification;
 	      var notifications = this.state.notifications.filter(function (toCheck) {
 	        if (toCheck.uid === uid) {
 	          notification = toCheck;
+	          notification = Object.assign(notification, { wasAutoDimissed: wasAutoDimissed });
 	          return false;
 	        }
 	        return true;
@@ -2984,7 +2985,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function getInitialState() {
 	      return {
 	        visible: true,
-	        removed: false
+	        removed: false,
+	        wasAutoDimissed: false
 	      };
 	    }
 
@@ -3020,7 +3022,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _removeNotification: function () {
 	    function _removeNotification() {
-	      this.props.onRemove(this.props.uid);
+	      this.props.onRemove(this.props.uid, this.state.wasAutoDimissed);
 	    }
 
 	    return _removeNotification;
@@ -3074,7 +3076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      if (autoDismiss) {
 	        this._notificationTimer = new Helpers.Timer(function () {
-	          self._hideNotification();
+	          self.setState({ wasAutoDimissed: true }, self._hideNotification);
 	        }, autoDismiss * 1000);
 	      }
 	    }

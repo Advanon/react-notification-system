@@ -51,7 +51,8 @@ var CustomNotificationItem = createReactClass({
   getInitialState: function() {
     return {
       visible: true,
-      removed: false
+      removed: false,
+      wasAutoDimissed: false
     };
   },
 
@@ -79,7 +80,7 @@ var CustomNotificationItem = createReactClass({
   },
 
   _removeNotification: function() {
-    this.props.onRemove(this.props.uid);
+    this.props.onRemove(this.props.uid, this.state.wasAutoDimissed);
   },
 
   _dismiss: function() {
@@ -119,9 +120,10 @@ var CustomNotificationItem = createReactClass({
       }
     }
 
+
     if (autoDismiss) {
       this._notificationTimer = new Helpers.Timer(function() {
-        self._hideNotification();
+        self.setState({ wasAutoDimissed: true }, self._hideNotification);
       }, autoDismiss * 1000);
     }
   },

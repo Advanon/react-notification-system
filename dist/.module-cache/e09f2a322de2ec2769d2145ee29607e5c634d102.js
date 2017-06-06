@@ -63,11 +63,12 @@ var NotificationSystem = createReactClass({
     }
   },
 
-  _didNotificationRemoved: function(uid) {
+  _didNotificationRemoved: function(uid, wasAutoDimissed) {
     var notification;
     var notifications = this.state.notifications.filter(function(toCheck) {
       if (toCheck.uid === uid) {
         notification = toCheck;
+        notification = Object.assign(notification, { wasAutoDimissed });
         return false;
       }
       return true;

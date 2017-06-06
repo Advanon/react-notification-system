@@ -52,7 +52,7 @@ var CustomNotificationItem = createReactClass({
     return {
       visible: true,
       removed: false,
-      wasAutoDimissed: false,
+      wasAutoDimissed: false
     };
   },
 
@@ -71,7 +71,7 @@ var CustomNotificationItem = createReactClass({
 
     this.setState({
       visible: false,
-      removed: true,
+      removed: true
     });
 
     if (this._noAnimation) {
